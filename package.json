@@ -1,0 +1,46 @@
+{
+  "name": "ezkielyna-audio-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for text to speech and speech to text from local audio files via the Ezkielyna API",
+  "mcpName": "io.github.EzkielynaGroup/ezkielyna-audio-mcp",
+  "type": "module",
+  "bin": {
+    "ezkielyna-audio-mcp": "ezkielyna-audio-mcp.mjs"
+  },
+  "files": [
+    "ezkielyna-audio-mcp.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "text-to-speech",
+    "tts",
+    "speech-to-text",
+    "transcription",
+    "whisper",
+    "edge-tts",
+    "bahasa-indonesia",
+    "claude-desktop",
+    "claude-code",
+    "cursor",
+    "opencode"
+  ],
+  "author": "Ezekiel Lieberhart (Ezkielyna)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EzkielynaGroup/ezkielyna-audio-mcp.git"
+  },
+  "homepage": "https://github.com/EzkielynaGroup/ezkielyna-audio-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/EzkielynaGroup/ezkielyna-audio-mcp/issues"
+  }
+}

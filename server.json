@@ -1,0 +1,42 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.EzkielynaGroup/ezkielyna-audio-mcp",
+  "title": "Ezkielyna Audio",
+  "description": "Text to speech and speech to text from local audio files via the Ezkielyna API (prepaid key).",
+  "repository": {
+    "url": "https://github.com/EzkielynaGroup/ezkielyna-audio-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "ezkielyna-audio-mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "EZKIELYNA_API_KEY",
+          "description": "Ezkielyna API key (Auto group, or a group that lists the audio models)",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "EZKIELYNA_AUDIO_DIR",
+          "description": "Folder where speech files are saved (default ~/Music/Ezkielyna)",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "EZKIELYNA_MAX_CALLS",
+          "description": "Paid calls per session (default 30)",
+          "isRequired": false,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
