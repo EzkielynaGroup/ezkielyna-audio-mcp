@@ -63,6 +63,7 @@ before(async () => {
     if (req.url === '/v1/audio/speech') {
       rec.json = JSON.parse(body.toString());
       const { model, input, response_format: fmt } = rec.json;
+      if (input.includes('limited')) return json(res, 403, { error: { message: 'This token has no access to model edge-tts' } });
       if (input.includes('jsonreply')) return json(res, 200, { error: { message: 'voice not supported' } });
       if (input.includes('garbage')) { res.writeHead(200, { 'Content-Type': 'application/octet-stream' }); return res.end(Buffer.from('<html>oops</html>')); }
       const wav = model !== 'edge-tts' && fmt === 'wav';
@@ -206,6 +207,9 @@ test('text_to_speech: input checks happen before sending; non-audio answers are 
   const j = await mcp.call('text_to_speech', { text: 'jsonreply' });
   assert.ok(j.isError);
   assert.match(textOf(j), /did not return audio.*voice not supported/);
+  const lim = await mcp.call('text_to_speech', { text: 'limited' });
+  assert.ok(lim.isError);
+  assert.match(textOf(lim), /model limits/);
   // The refused JSON answer gave the only slot back, so this call still runs (and is not audio either).
   const g = await mcp.call('text_to_speech', { text: 'garbage' });
   assert.ok(g.isError);

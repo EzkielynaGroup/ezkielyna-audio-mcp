@@ -338,6 +338,11 @@ function friendlyError(status, body) {
   } catch { msg = body; }
   const all = (msg + ' ' + code).toLowerCase();
   const detail = scrub(msg).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 200).replace(/[.\s]+$/, '');
+  // New API: a key with its own model list (API Keys > edit > model limits) answers "This token has no access to model X".
+  if (/no access to model|无权访问/.test(all)) {
+    return 'Key ini dibatasi ke daftar model tertentu (pengaturan key: batas model) dan model ini tidak termasuk. Pakai model yang diizinkan, ubah batas model key, atau buat key baru tanpa batas model. '
+      + '/ This key is limited to a model list (key setting: model limits) that does not include this model: use an allowed model, edit the key, or create a key without model limits.' + (detail ? ` [${detail}]` : '');
+  }
   if (status === 401) return 'Key API salah atau tidak aktif. Cek EZKIELYNA_API_KEY. / Wrong or inactive API key: check EZKIELYNA_API_KEY.';
   const balance = `Saldo API tidak cukup. Top up di ${BUY_URL} lalu coba lagi. / Insufficient API balance: top up and try again.`;
   if (status === 402) return balance;
